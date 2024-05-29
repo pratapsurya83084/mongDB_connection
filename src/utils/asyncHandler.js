@@ -1,13 +1,15 @@
-const asycnHandler=(requestHandeler)=>{
 
-    (req,res,next)=>{
+
+const asyncHandeler=(requestHandeler)=>{
+
+   return  (req,res,next)=>{
     Promise.resolve(requestHandeler(req,res,next)).catch((err)=>next(err))
     }
 }
 
 
 
-export {asycnHandler}
+export {asyncHandeler}
 
 
 // const asycnHandler=(fn)=>async(req,res,next)=>{
