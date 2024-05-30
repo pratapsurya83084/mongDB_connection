@@ -25,14 +25,14 @@ const userSchema = new Schema(
       index: true, //easy to seraching in database
       trim: true,
     },
-    avatar: {
-      type: String, //cloudinary URL use after
-      required: true,
-    },
-    coverImage: {
-      type: String, //cloudinary URL use after
-    },
-    watchHistory: [
+    // avatar: {
+    //   type: String, //cloudinary URL use after
+    //   required: true,
+    // },
+    // coverImage: {
+    //   type: String, //cloudinary URL use after
+    // },
+     watchHistory: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Video",
@@ -57,7 +57,7 @@ userSchema.pre("save", async function (next) {
     //if user password is not modify then next run karo
     return next();
   
-    //take passwor fild from userSchema and encrypt karo
+    //take password fild from userSchema and encrypt karo
     this.password =await bcrypt.hash(this.password, 10); //else the user password modify hai to dubara bcrypt kar do.
 
     next();
