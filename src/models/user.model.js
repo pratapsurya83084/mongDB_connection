@@ -25,7 +25,7 @@ const userSchema = new Schema(
       index: true, //easy to seraching in database
       trim: true,
     },
-    avtar: {
+    avatar: {
       type: String, //cloudinary URL use after
       required: true,
     },
@@ -58,7 +58,7 @@ userSchema.pre("save", async function (next) {
     return next();
   
     //take passwor fild from userSchema and encrypt karo
-    this.password = bcrypt.hash(this.password, 10); //else the user password modify hai to dubara bcrypt kar do.
+    this.password =await bcrypt.hash(this.password, 10); //else the user password modify hai to dubara bcrypt kar do.
 
     next();
   
