@@ -25,13 +25,13 @@ const userSchema = new Schema(
       index: true, //easy to seraching in database
       trim: true,
     },
-    // avatar: {
-    //   type: String, //cloudinary URL use after
-    //   required: true,
-    // },
-    // coverImage: {
-    //   type: String, //cloudinary URL use after
-    // },
+    avatar: {
+      type: String, //cloudinary URL use after
+      required: true,
+    },
+    coverImage: {
+      type: String, //cloudinary URL use after
+    },
      watchHistory: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -77,9 +77,7 @@ userSchema.methods.generateAccessToken = function(){
  return  jwt.sign(
     { _id:this._id, email:this.email, username:this.username, fullName:this.fullName,},
   process.env.ACCESS_TOKEN_SECRET,
-  {
-    expiresIn:process.env.ACCESS_TOKEN_EXPIRY,
-  }
+{expiresIn:process.env.ACCESS_TOKEN_EXPIRY, }
 )
 
 }
@@ -87,12 +85,9 @@ userSchema.methods.generateAccessToken = function(){
 //generate  auto RefreshToken
 userSchema.methods.generateRefreshToken = function(){
 
-  return  jwt.sign(
-    { _id:this._id},
-  process.env.REFRESH_TOKEN_SECRET,
-  {
-    expiresIn:process.env.REFRESH_TOKEN_EXPIRY,
-  }
+  return  jwt.sign({ _id:this._id},
+    process.env.REFRESH_TOKEN_SECRET,
+  {expiresIn:process.env.REFRESH_TOKEN_EXPIRY, }
 )
 
 }
